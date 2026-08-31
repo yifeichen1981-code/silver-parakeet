@@ -1,29 +1,53 @@
 <!DOCTYPE html>
 <html lang="zh-CN"><head><meta charset="UTF-8"><title>海外电商库存去化执行方案</title>
 <style>
-  @page { size: A4; margin: 13mm 11mm; }
-  * { box-sizing: border-box; margin:0; padding:0; }
-  body { font-family:"WenQuanYi Zen Hei","Noto Sans CJK SC",sans-serif; font-size:8.8pt; line-height:1.55; color:#1a1f1c; }
-  .head { text-align:center; padding:8px 0 6px; border-bottom:3px solid #00a651; margin-bottom:11px; }
+  @page { size:A4; margin:12mm 10mm; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"WenQuanYi Zen Hei","Noto Sans CJK SC",sans-serif; font-size:8.6pt; line-height:1.55; color:#1a1f1c; }
+  .head { text-align:center; padding:8px 0 6px; border-bottom:3px solid #00a651; margin-bottom:10px; }
   .head .brand { color:#00a651; font-weight:bold; font-size:9pt; letter-spacing:2px; }
   .head h1 { font-size:16pt; margin:5px 0 4px; }
-  .head .sub { font-size:8.8pt; color:#555; }
+  .head .sub { font-size:8.6pt; color:#555; }
   .head .ask { font-size:9.5pt; margin-top:5px; }
   .head .ask b { color:#00795c; font-size:11.5pt; }
-  h2 { font-size:11pt; color:#00795c; border-left:5px solid #00a651; padding-left:9px; margin:14px 0 6px; page-break-after:avoid; }
-  h3 { font-size:9.8pt; margin:9px 0 4px; page-break-after:avoid; color:#12503c; }
+  h2 { font-size:11pt; color:#00795c; border-left:5px solid #00a651; padding-left:9px; margin:13px 0 6px; page-break-after:avoid; }
+  h3 { font-size:9.6pt; margin:9px 0 4px; page-break-after:avoid; color:#12503c; }
   p { margin:4px 0; text-align:justify; }
-  table { width:100%; border-collapse:collapse; margin:5px 0 8px; font-size:7.6pt; page-break-inside:avoid; }
+  table { width:100%; border-collapse:collapse; margin:5px 0 8px; font-size:7.5pt; page-break-inside:avoid; }
   th { background:#00795c; color:#fff; font-weight:bold; padding:4px 5px; text-align:left; }
-  td { border:1px solid #d5e3da; padding:3px 5px; vertical-align:top; }
-  tr:nth-child(even) td { background:#f6faf7; }
-  ol,ul { margin:3px 0 6px 18px; }
-  li { margin:2px 0; }
+  td { border:1px solid #d5e3da; padding:3px 5px; vertical-align:middle; }
+  tr:nth-child(even) td { background:#f8fbf9; }
+  ol,ul { margin:3px 0 6px 18px; } li { margin:2px 0; }
   b,strong { color:#00795c; }
-  hr { border:none; border-top:1px solid #ddd; margin:10px 0; }
+  hr { border:none; border-top:1px solid #ddd; margin:9px 0; }
   em { color:#777; font-size:7.2pt; font-style:normal; }
+  blockquote { background:#f0faf4; border-left:4px solid #00a651; padding:6px 10px; margin:6px 0; border-radius:0 5px 5px 0; }
   code { font-family:monospace; background:#f0f4f1; padding:0 3px; border-radius:3px; }
-  blockquote { background:#f0faf4; border-left:4px solid #00a651; padding:6px 10px; margin:7px 0; border-radius:0 5px 5px 0; }
+  /* ---- dashboard ---- */
+  table.dash { font-size:7.2pt; }
+  table.dash th { padding:4px 4px; font-size:7pt; }
+  table.dash td { padding:2.5px 4px; }
+  .dash .mdl { font-weight:bold; color:#12503c; white-space:nowrap; }
+  .dash .n { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .dash .wh { font-size:6.6pt; color:#4a5a50; }
+  .dash .bar { width:120px; }
+  .bw { height:9px; width:100%; display:flex; border-radius:2px; overflow:hidden; background:#eef2ef; }
+  .bw span { display:block; height:100%; }
+  .s1,i.s1 { background:#2f9e5f; } .s2,i.s2 { background:#8dc98a; }
+  .s3,i.s3 { background:#f2c14e; } .s4,i.s4 { background:#e8883a; } .s5,i.s5 { background:#c0392b; }
+  .lg { font-weight:normal; font-size:6.2pt; }
+  .lg i { display:inline-block; width:6px; height:6px; border-radius:1px; margin:0 1px 0 4px; }
+  .up { color:#c0392b; font-weight:bold; } .dn { color:#2f9e5f; } .zero { color:#999; }
+  .p-hi { color:#c0392b; font-weight:bold; } .p-mid { color:#e07a1f; font-weight:bold; }
+  .p-lo { color:#7a7a2f; } .p-zero { color:#aaa; }
+  .tag { display:inline-block; padding:1px 5px; border-radius:3px; font-size:6.6pt; font-weight:bold; white-space:nowrap; color:#fff; }
+  .t-bad { background:#c0392b; } .t-warn { background:#e07a1f; } .t-mid { background:#d4a017; }
+  .t-ok { background:#2f9e5f; } .t-tail { background:#9aa39c; }
+  .dash tr.r-bad td:first-child { border-left:3px solid #c0392b; }
+  .dash tr.r-warn td:first-child { border-left:3px solid #e07a1f; }
+  .dash tr.r-mid td:first-child { border-left:3px solid #d4a017; }
+  .dash tr.r-ok td:first-child { border-left:3px solid #2f9e5f; }
+  .dash tr.tot td { background:#eaf7ef !important; font-weight:bold; }
 </style></head><body>
 <div class="head">
   <div class="brand">uCloudlink · 海外电商部</div>
@@ -31,9 +55,15 @@
   <div class="sub">执行周期 2026 年 9 月 – 12 月 ｜ 数据基准：《库存明细表 2026.7.31》</div>
   <div class="ask">现存 <b>39,889 台</b>　｜　目标净减 <b>7,978 台（20%）</b>　｜　专项去化 <b>3,882 台</b></div>
 </div>
-<p><b>执行周期：2026 年 9 月 – 12 月</b> ｜ 海外电商部 ｜ 数据基准：《库存明细表 2026.7.31》</p>
 <hr>
-<h2>一、目标与拆解</h2>
+<h2>一、全型号库存看板（2026.7.31）</h2>
+<p><b>总库存 39,889 台</b>｜上月 40,913 台，<b>环比 -1,024 台（-2.5%）</b>｜超 6 个月 17,660 台（44.3%）｜<b>超 1 年 5,570 台（14.0%）</b></p>
+<table class="dash"><tr><th>型号</th><th>库存</th><th>环比</th><th>库龄结构　<span class="lg"><i class="s1"></i>≤3月 <i class="s2"></i>3-6月 <i class="s3"></i>6-12月 <i class="s4"></i>1-2年 <i class="s5"></i>2年+</span></th><th>超1年</th><th>占比</th><th>可售月</th><th>主要仓库</th><th>处置</th></tr><tr class="r-bad"><td class="mdl">U3</td><td class="n">6,051</td><td class="n"><span class="dn">-279</span></td><td class="bar"><div class="bw"><span class="s1" style="width:24.8%"></span><span class="s2" style="width:7.5%"></span><span class="s3" style="width:47.5%"></span><span class="s4" style="width:12.1%"></span><span class="s5" style="width:8.2%"></span></div></td><td class="n">1,225</td><td class="n p-mid">20.2%</td><td class="n">21.7</td><td class="wh">美亚 3,266 / shopify仓 1,126</td><td><span class="tag t-bad">A 清仓</span></td></tr><tr class="r-bad"><td class="mdl">U20</td><td class="n">4,305</td><td class="n"><span class="dn">-127</span></td><td class="bar"><div class="bw"><span class="s1" style="width:69.2%"></span><span class="s2" style="width:14.4%"></span><span class="s3" style="width:6.4%"></span><span class="s4" style="width:8.8%"></span><span class="s5" style="width:1.2%"></span></div></td><td class="n">433</td><td class="n p-lo">10.1%</td><td class="n">33.9</td><td class="wh">美亚 1,592 / 中心仓 1,460</td><td><span class="tag t-bad">A 清仓</span></td></tr><tr class="r-bad"><td class="mdl">G40</td><td class="n">3,023</td><td class="n"><span class="dn">-273</span></td><td class="bar"><div class="bw"><span class="s1" style="width:6.8%"></span><span class="s2" style="width:21.3%"></span><span class="s3" style="width:27.1%"></span><span class="s4" style="width:40.4%"></span><span class="s5" style="width:4.3%"></span></div></td><td class="n">1,353</td><td class="n p-mid">44.8%</td><td class="n">11.1</td><td class="wh">美亚 2,027 / shopify仓 238</td><td><span class="tag t-bad">A 清仓</span></td></tr><tr class="r-bad"><td class="mdl">T10</td><td class="n">1,593</td><td class="n"><span class="zero">0</span></td><td class="bar"><div class="bw"><span class="s1" style="width:0.8%"></span><span class="s2" style="width:1.2%"></span><span class="s3" style="width:16.7%"></span><span class="s4" style="width:76.3%"></span><span class="s5" style="width:5.0%"></span></div></td><td class="n">1,295</td><td class="n p-hi">81.3%</td><td class="n">零动销</td><td class="wh">中心仓 625 / 美亚 290</td><td><span class="tag t-bad">A 清仓·EOL</span></td></tr><tr class="r-bad"><td class="mdl">U3X</td><td class="n">1,468</td><td class="n"><span class="dn">-300</span></td><td class="bar"><div class="bw"><span class="s1" style="width:11.9%"></span><span class="s2" style="width:32.6%"></span><span class="s3" style="width:41.1%"></span><span class="s4" style="width:10.4%"></span><span class="s5" style="width:4.1%"></span></div></td><td class="n">213</td><td class="n p-lo">14.5%</td><td class="n">4.9</td><td class="wh">美亚 578 / shopify仓 441</td><td><span class="tag t-bad">A 清仓</span></td></tr><tr class="r-bad"><td class="mdl">G4S</td><td class="n">338</td><td class="n"><span class="zero">0</span></td><td class="bar"><div class="bw"><span class="s3" style="width:8.6%"></span><span class="s5" style="width:91.4%"></span></div></td><td class="n">309</td><td class="n p-hi">91.4%</td><td class="n">零动销</td><td class="wh">美国退货仓 254 / 美亚 55</td><td><span class="tag t-bad">A 清仓·EOL</span></td></tr><tr class="r-bad"><td class="mdl">X103</td><td class="n">321</td><td class="n"><span class="dn">-36</span></td><td class="bar"><div class="bw"><span class="s1" style="width:37.1%"></span><span class="s2" style="width:0.3%"></span><span class="s3" style="width:38.6%"></span><span class="s4" style="width:15.0%"></span><span class="s5" style="width:9.0%"></span></div></td><td class="n">77</td><td class="n p-mid">24.0%</td><td class="n">8.9</td><td class="wh">shopify仓 125 / TK 88</td><td><span class="tag t-bad">A 清仓</span></td></tr><tr class="r-bad"><td class="mdl">G3</td><td class="n">244</td><td class="n"><span class="zero">0</span></td><td class="bar"><div class="bw"><span class="s3" style="width:17.2%"></span><span class="s5" style="width:82.8%"></span></div></td><td class="n">202</td><td class="n p-hi">82.8%</td><td class="n">零动销</td><td class="wh">美亚 202 / shopify仓 42</td><td><span class="tag t-bad">A 清仓</span></td></tr><tr class="r-bad"><td class="mdl">R40</td><td class="n">179</td><td class="n"><span class="zero">0</span></td><td class="bar"><div class="bw"><span class="s5" style="width:100.0%"></span></div></td><td class="n">179</td><td class="n p-hi">100.0%</td><td class="n">零动销</td><td class="wh">中心仓 179</td><td><span class="tag t-bad">A 清仓</span></td></tr><tr class="r-bad"><td class="mdl">U3B</td><td class="n">153</td><td class="n"><span class="zero">0</span></td><td class="bar"><div class="bw"><span class="s3" style="width:17.6%"></span><span class="s4" style="width:1.3%"></span><span class="s5" style="width:81.0%"></span></div></td><td class="n">126</td><td class="n p-hi">82.4%</td><td class="n">零动销</td><td class="wh">美亚 109 / shopify仓 25</td><td><span class="tag t-bad">A 清仓</span></td></tr><tr class="r-bad"><td class="mdl">U30</td><td class="n">90</td><td class="n"><span class="zero">0</span></td><td class="bar"><div class="bw"><span class="s1" style="width:1.1%"></span><span class="s2" style="width:1.1%"></span><span class="s3" style="width:25.6%"></span><span class="s4" style="width:37.8%"></span><span class="s5" style="width:34.4%"></span></div></td><td class="n">65</td><td class="n p-hi">72.2%</td><td class="n">零动销</td><td class="wh">美亚 40 / 欧亚 27</td><td><span class="tag t-bad">A 清仓</span></td></tr><tr class="r-bad"><td class="mdl">U2S</td><td class="n">84</td><td class="n"><span class="zero">0</span></td><td class="bar"><div class="bw"><span class="s5" style="width:100.0%"></span></div></td><td class="n">84</td><td class="n p-hi">100.0%</td><td class="n">零动销</td><td class="wh">美亚 84</td><td><span class="tag t-bad">A 清仓</span></td></tr><tr class="r-bad"><td class="mdl">U5</td><td class="n">2</td><td class="n"><span class="zero">0</span></td><td class="bar"><div class="bw"><span class="s5" style="width:100.0%"></span></div></td><td class="n">2</td><td class="n p-hi">100.0%</td><td class="n">零动销</td><td class="wh">欧亚 2</td><td><span class="tag t-bad">A 清仓</span></td></tr><tr class="r-warn"><td class="mdl">X100</td><td class="n">5,215</td><td class="n"><span class="dn">-296</span></td><td class="bar"><div class="bw"><span class="s1" style="width:11.6%"></span><span class="s2" style="width:41.4%"></span><span class="s3" style="width:46.9%"></span><span class="s4" style="width:0.1%"></span></div></td><td class="n">7</td><td class="n p-lo">0.1%</td><td class="n">17.6</td><td class="wh">中心仓 2,906 / shopify仓 1,020</td><td><span class="tag t-warn">B 提前</span></td></tr><tr class="r-warn"><td class="mdl">X110</td><td class="n">624</td><td class="n"><span class="dn">-84</span></td><td class="bar"><div class="bw"><span class="s2" style="width:65.1%"></span><span class="s3" style="width:34.9%"></span></div></td><td class="n">0</td><td class="n p-zero">0.0%</td><td class="n">7.4</td><td class="wh">中心仓 220 / shopify仓 218</td><td><span class="tag t-warn">B 提前</span></td></tr><tr class="r-warn"><td class="mdl">SIMBOX2</td><td class="n">235</td><td class="n"><span class="dn">-7</span></td><td class="bar"><div class="bw"><span class="s2" style="width:0.9%"></span><span class="s3" style="width:99.1%"></span></div></td><td class="n">0</td><td class="n p-zero">0.0%</td><td class="n">33.6</td><td class="wh">shopify仓 235</td><td><span class="tag t-warn">B 关注</span></td></tr><tr class="r-mid"><td class="mdl">X200</td><td class="n">2,961</td><td class="n"><span class="dn">-90</span></td><td class="bar"><div class="bw"><span class="s1" style="width:41.7%"></span><span class="s2" style="width:48.1%"></span><span class="s3" style="width:10.2%"></span></div></td><td class="n">0</td><td class="n p-zero">0.0%</td><td class="n">32.9</td><td class="wh">shopify仓 1,228 / 中心仓 1,080</td><td><span class="tag t-mid">C 动销</span></td></tr><tr class="r-mid"><td class="mdl">C4</td><td class="n">1,303</td><td class="n"><span class="dn">-36</span></td><td class="bar"><div class="bw"><span class="s1" style="width:100.0%"></span></div></td><td class="n">0</td><td class="n p-zero">0.0%</td><td class="n">36.2</td><td class="wh">欧亚 632 / shopify仓 484</td><td><span class="tag t-mid">C 动销</span></td></tr><tr class="r-ok"><td class="mdl">U50</td><td class="n">7,664</td><td class="n"><span class="up">+396</span></td><td class="bar"><div class="bw"><span class="s1" style="width:48.0%"></span><span class="s2" style="width:9.4%"></span><span class="s3" style="width:42.6%"></span></div></td><td class="n">0</td><td class="n p-zero">0.0%</td><td class="n">—</td><td class="wh">美亚 3,499 / shopify仓 1,827</td><td><span class="tag t-ok">健康</span></td></tr><tr class="r-ok"><td class="mdl">U40</td><td class="n">3,720</td><td class="n"><span class="up">+88</span></td><td class="bar"><div class="bw"><span class="s1" style="width:38.3%"></span><span class="s2" style="width:47.5%"></span><span class="s3" style="width:14.2%"></span></div></td><td class="n">0</td><td class="n p-zero">0.0%</td><td class="n">—</td><td class="wh">shopify仓 1,424 / 中心仓 890</td><td><span class="tag t-ok">健康</span></td></tr><tr class="r-ok"><td class="mdl">G50max</td><td class="n">308</td><td class="n"><span class="up">+20</span></td><td class="bar"><div class="bw"><span class="s1" style="width:100.0%"></span></div></td><td class="n">0</td><td class="n p-zero">0.0%</td><td class="n">—</td><td class="wh">shopify仓 163 / 中心仓 100</td><td><span class="tag t-ok">健康·新品</span></td></tr><tr class="r-tail"><td class="mdl">R4P</td><td class="n">8</td><td class="n"><span class="zero">0</span></td><td class="bar"><div class="bw"><span class="s3" style="width:100.0%"></span></div></td><td class="n">0</td><td class="n p-zero">0.0%</td><td class="n">零动销</td><td class="wh">shopify仓 8</td><td><span class="tag t-tail">长尾</span></td></tr><tr class="tot"><td>合计</td><td class="n">39,889</td><td class="n">-1,024</td><td class="bar"><div class="bw"><span class="s1" style="width:34%"></span><span class="s2" style="width:21.8%"></span><span class="s3" style="width:30.3%"></span><span class="s4" style="width:9.5%"></span><span class="s5" style="width:4.5%"></span></div></td><td class="n">5,570</td><td class="n">14.0%</td><td class="n">—</td><td></td><td></td></tr></table>
+<p>\* X110 的 7.4 个月为表面值：动销全部来自美亚（该仓仅剩 67 台），其余 557 台（89%）分布在三个本月零动销的仓。</p>
+<p><b>看板速读：</b></p>
+<ul><li><b>健康（3 个型号，11,692 台）</b>：U50、U40、G50max——零呆滞、销量在增长，<b>不动价</b>，仅需控制后续备货；</li><li><b>A 清仓（12 个型号，呆滞 5,570 台）</b>：G40、T10、U3 三款占呆滞 69.5%；T10、G4 Pro、G3、R40、U3B、U2S、U30、U5 八款超 1 年占比均在 72% 以上，属彻底呆滞；</li><li><b>B 提前（X100、X110，另 SIMBOX2 关注）</b>：账面未呆滞但趋势不可逆——X100 中心仓 2,906 台零动销、X110 有 89% 库存压在零动销仓、SIMBOX2 99% 已进 6–12 个月且可售 33.6 个月；</li><li><b>C 动销（C4、X200）</b>：新货非呆滞，但 C4 可售 36.2 个月且<b>完全未铺美亚</b>，X200 可售 32.9 个月且中心仓 1,080 台零动销——需促动销而非降价；</li><li><b>中心仓（9,062 台）警报</b>：X100 2,906、X200 1,080、T10 625、X110 220、R40 179 均为零动销，全仓环比 <b>+1,500 台</b>，是本轮最大结构性问题。</li></ul>
+<hr>
+<h2>二、目标与拆解</h2>
 <p><b>总目标：年底前库存净减 20%，即 7,978 台</b>（现存 39,889 台 → 目标 31,911 台）</p>
 <table><tr><th>来源</th><th>目标台数</th><th>说明</th></tr>
 <tr><td>自然去化</td><td>4,096</td><td>按当前 -1,024 台/月节奏，9–12 月顺延</td></tr>
@@ -49,7 +79,7 @@
 <tr><td></td><td></td><td></td><td><b>3,882</b></td><td></td></tr>
 </table>
 <hr>
-<h2>二、A 线 · 清仓出清（呆滞 5,570 台 → 目标 2,600 台）</h2>
+<h2>三、A 线 · 清仓出清（呆滞 5,570 台 → 目标 2,600 台）</h2>
 <h3>执行清单（按型号 × 仓库，可直接派工）</h3>
 <table><tr><th>型号</th><th>呆滞总量</th><th>美亚</th><th>欧亚</th><th>日亚</th><th>英亚</th><th>TK仓</th><th>中心仓</th><th>退货仓</th><th>处置方式</th></tr>
 <tr><td><b>G40</b></td><td>1,353</td><td>1,055</td><td>137</td><td>126</td><td>15</td><td>—</td><td>18</td><td>—</td><td>美亚为主战场，Outlet + 深度折扣；欧/日/英亚同步</td></tr>
@@ -78,7 +108,7 @@
 </table>
 <blockquote><b>T10 建议整体 EOL</b>：1,593 台中 1,295 台（81.3%）超 1 年，且五个仓均有分布、月动销为 0，继续留存只会持续占用仓位与资金。</blockquote>
 <hr>
-<h2>三、B 线 · 提前处理（X100、X110 共 5,839 台 → 目标 900 台）</h2>
+<h2>四、B 线 · 提前处理（X100、X110 共 5,839 台 → 目标 900 台）</h2>
 <p>这两个型号目前<b>账面尚未呆滞，但趋势不可逆</b>，等它们滚进 1 年以上处置成本更高。</p>
 <h3>X100（5,215 台）</h3>
 <table><tr><th>仓库</th><th>库存</th><th>月动销</th><th>库龄结构</th><th>判断</th></tr>
@@ -98,7 +128,7 @@
 </table>
 <ul><li><b>表面月动销率 11.9%，实为假象</b>——动销全部来自美亚，其余 <b>557 台（89%）分布在三个零动销的仓</b>，本月一台未动；</li><li>shopify 仓 218 台已进入 6–12 个月，再放半年即成呆滞；</li><li><b>动作</b>：① 557 台零动销库存<b>整批调拨至美亚</b>（唯一有动销的渠道）或直接走尾货批发；② 与 A 线清仓专区打包处理；③ 不再补货。</li></ul>
 <hr>
-<h2>四、C 线 · 动销加速（C4、X200 共 4,264 台 → 目标 382 台）</h2>
+<h2>五、C 线 · 动销加速（C4、X200 共 4,264 台 → 目标 382 台）</h2>
 <p>这两个是<b>新货，不是呆滞，不应降价清仓</b>，但当前动销速度远低于预期，若不加速，明年即成新一批呆滞。</p>
 <h3>C4（1,303 台）— 可售 36.2 个月</h3>
 <table><tr><th>仓库</th><th>库存</th><th>月动销</th></tr>
@@ -118,7 +148,7 @@
 </table>
 <ul><li>套餐已上线并在 shopify 见效（月动销 208 台），但<b>美亚与中心仓是两个堵点</b>；</li><li><b>动作</b>：① 中心仓 1,080 台尽快铺至 shopify（已验证有效渠道）与美亚；② <b>美亚套餐单独复盘</b>——同样套餐在 shopify 有效、美亚仅 5 台/月，需排查 Listing、价格带、广告投放；③ 暂停 TK 仓继续进货（本月已 +125 台）。</li></ul>
 <hr>
-<h2>五、D 线 · 源头控制（中心仓 9,062 台）</h2>
+<h2>六、D 线 · 源头控制（中心仓 9,062 台）</h2>
 <p><b>中心仓是本轮最大的结构性问题：全仓 9,062 台，本月环比 +1,500 台，且所有型号均为零动销或净增长。</b></p>
 <table><tr><th>型号</th><th>库存</th><th>月动销</th><th>其中呆滞</th><th>处置方向</th></tr>
 <tr><td>X100</td><td>2,906</td><td>0</td><td>0</td><td>铺货或批发（见 B 线）</td></tr>
@@ -136,7 +166,7 @@
 <p><b>动作：</b></p>
 <ol><li><b>9 月起冻结中心仓非必要进货</b>，U50 / U40 / X200 / C4 等后续批次按新物流周期（约 3 个月）压缩订货量——责任方：供应链，9 月 10 日前给出调整后的备货计划；</li><li><b>中心仓存量 30 天内完成铺货决策</b>：能铺的铺（X100、X200、U20、U40、U3），不能铺的批发或处置（T10、R40、X110）——责任方：电商运营 + 供应链，9 月 30 日前出清单；</li><li><b>中心仓库存台数纳入月度考核</b>，环比必须由 +1,500 转为负增长。</li></ol>
 <hr>
-<h2>六、月度排期与目标分解</h2>
+<h2>七、月度排期与目标分解</h2>
 <table><tr><th>月份</th><th>关键动作</th><th>目标去化（含自然）</th></tr>
 <tr><td><b>9 月</b></td><td>A 线清仓全渠道上线；退货仓分拣；尾货批发询价；C4 美亚铺货；中心仓进货冻结 + 铺货清单</td><td>1,600 台</td></tr>
 <tr><td><b>10 月</b></td><td>A 线加码；X100/X110 提前清仓；X200 美亚套餐复盘整改；报废额度批复</td><td>1,900 台</td></tr>
@@ -145,7 +175,7 @@
 <tr><td></td><td><b>合计</b></td><td><b>8,000 台 ✓</b></td></tr>
 </table>
 <hr>
-<h2>七、追踪机制</h2>
+<h2>八、追踪机制</h2>
 <p><b>月度追踪四个指标</b>（建议每月 5 日前出数）：</p>
 <table><tr><th>指标</th><th>起点（7 月末）</th><th>年底目标</th></tr>
 <tr><td>总库存台数</td><td>39,889</td><td>≤ 31,911</td></tr>
@@ -155,7 +185,7 @@
 </table>
 <p><b>例会机制</b>：每月一次库存去化例会，电商运营、供应链、财务、品牌四方参加，对四条线进度逐项过账。</p>
 <hr>
-<h2>八、需决策事项</h2>
+<h2>九、需决策事项</h2>
 <ol><li><b>T10 整体 EOL 退市</b>——1,295 台呆滞（81.3%），五仓分布，月动销为 0，建议一次性清空；</li><li><b>清仓折扣权限</b>——A 线 30–50% off，B 线（X100/X110）建议 20–35%，需批复价格底线；</li><li><b>超 2 年库存 1,778 台的报废/捐赠额度</b>——涉及资产减值，需财务口径同步；</li><li><b>中心仓进货冻结范围</b>——哪些型号可豁免（如已签约的 G50 Max 新品）；</li><li><b>C4 美亚铺货资源</b>——是否从欧亚/shopify 调拨，或走新一批直发，涉及物流成本；</li><li><b>X200 美亚套餐问题定责</b>——同套餐 shopify 月销 208 台、美亚仅 5 台，需运营给出诊断与整改方案；</li><li><b>客退品口径核实</b>——退货仓账面仅 254 台，与&quot;历年累积数千台&quot;的判断差距较大，请确认其余是否已混入各仓正常库存，以便在盘点中区分&quot;可翻新&quot;与&quot;真质量问题&quot;；</li><li><b>考核口径确认</b>——本方案以台数计。若按库存金额降 20% 考核，需补充各型号单位成本重算（高价机型与低价老款的金额权重差异较大，结论可能变化）。</li></ol>
 <hr>
 <p><em>数据来源：《库存明细表 2026.7.31》全量核算（179 行 SKU × 仓库记录，22 个型号，仅&quot;成品/裸机 × 线上-海外电商部&quot;）；总库存 39,889 台与海外电商部 202607 月报一致。月动销为「上月库存 − 本月库存」推算值，不含当月新到货影响。附型号级明细：<code>库存去化_型号级明细_202607.csv</code>。</em></p>
