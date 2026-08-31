@@ -1,196 +1,164 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<title>海外电商库存去化方案</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><title>海外电商库存去化方案（源表核准版）</title>
 <style>
-  @page { size: A4; margin: 15mm 14mm; }
+  @page { size: A4; margin: 14mm 12mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: "WenQuanYi Zen Hei", "Noto Sans CJK SC", sans-serif;
-    font-size: 9.5pt; line-height: 1.65; color: #1a1f1c;
-  }
-  .head { text-align: center; padding: 8px 0 6px; border-bottom: 3px solid #00a651; margin-bottom: 12px; }
-  .head .brand { color: #00a651; font-weight: bold; font-size: 10pt; letter-spacing: 2px; }
-  .head h1 { font-size: 16pt; line-height: 1.35; margin: 5px 0 4px; }
-  .head .sub { font-size: 9.5pt; color: #555; }
-  .head .ask { font-size: 10.5pt; margin-top: 5px; }
-  .head .ask b { color: #00795c; font-size: 12.5pt; }
-  h2 {
-    font-size: 12pt; color: #00795c; border-left: 5px solid #00a651;
-    padding-left: 9px; margin: 16px 0 7px; page-break-after: avoid;
-  }
-  h3 { font-size: 10.5pt; margin: 11px 0 5px; page-break-after: avoid; color: #1a1f1c; }
-  p { margin: 5px 0; text-align: justify; }
-  table {
-    width: 100%; border-collapse: collapse; margin: 7px 0 9px; font-size: 8.5pt;
-    page-break-inside: avoid;
-  }
-  th { background: #00795c; color: #fff; font-weight: bold; padding: 5px 7px; text-align: left; }
-  td { border: 1px solid #d5e3da; padding: 4px 7px; vertical-align: top; }
-  tr:nth-child(even) td { background: #f6faf7; }
-  .callout {
-    background: #f0faf4; border-left: 4px solid #00a651; padding: 7px 11px;
-    margin: 9px 0; border-radius: 0 6px 6px 0; page-break-inside: avoid;
-  }
-  .warn { background: #fff8ec; border-left-color: #e8a13a; }
-  .note { background: #f4f6f8; border-left-color: #8a9aa8; color: #444; font-size: 8.5pt; }
-  .tier-tag {
-    display: inline-block; font-size: 8pt; font-weight: bold; color: #fff;
-    background: #00795c; border-radius: 4px; padding: 1px 7px; margin-right: 6px;
-  }
-  .tier-tag.t1b { background: #1d6f4f; }
-  .tier-tag.t2 { background: #2f8f5b; }
-  .tier-tag.t3 { background: #6b9e7a; }
-  .tier-tag.t4 { background: #8a8f88; }
-  .kpi-row { display: flex; gap: 7px; margin: 9px 0; page-break-inside: avoid; }
-  .kpi {
-    flex: 1; border: 1px solid #cfe5d8; border-top: 3px solid #00a651; border-radius: 7px;
-    padding: 8px 10px; background: #fbfefc;
-  }
-  .kpi .num { font-size: 13pt; font-weight: bold; color: #00795c; }
-  .kpi .lbl { font-size: 8pt; color: #556; line-height: 1.45; margin-top: 3px; }
-  ol, ul { margin: 4px 0 7px 19px; }
-  li { margin: 3px 0; }
-  b, strong { color: #00795c; }
-  .footer-note { color: #777; font-size: 7.5pt; margin-top: 14px; border-top: 1px solid #ddd; padding-top: 6px; }
-  .dead td { background: #fdf3f0 !important; }
-  .page-break { page-break-before: always; }
-</style>
-</head>
-<body>
-
+  body { font-family: "WenQuanYi Zen Hei","Noto Sans CJK SC",sans-serif; font-size: 9pt; line-height: 1.6; color:#1a1f1c; }
+  .head { text-align:center; padding:8px 0 6px; border-bottom:3px solid #00a651; margin-bottom:12px; }
+  .head .brand { color:#00a651; font-weight:bold; font-size:9.5pt; letter-spacing:2px; }
+  .head h1 { font-size:16pt; margin:5px 0 4px; }
+  .head .sub { font-size:9pt; color:#555; }
+  .head .ask { font-size:10pt; margin-top:5px; }
+  .head .ask b { color:#00795c; font-size:12pt; }
+  h2 { font-size:11.5pt; color:#00795c; border-left:5px solid #00a651; padding-left:9px; margin:15px 0 7px; page-break-after:avoid; }
+  h3 { font-size:10pt; margin:10px 0 5px; page-break-after:avoid; }
+  p { margin:5px 0; text-align:justify; }
+  table { width:100%; border-collapse:collapse; margin:6px 0 9px; font-size:8pt; page-break-inside:avoid; }
+  th { background:#00795c; color:#fff; font-weight:bold; padding:4px 6px; text-align:left; }
+  td { border:1px solid #d5e3da; padding:3.5px 6px; vertical-align:top; }
+  tr:nth-child(even) td { background:#f6faf7; }
+  ol,ul { margin:4px 0 7px 19px; }
+  li { margin:2.5px 0; }
+  b,strong { color:#00795c; }
+  hr { border:none; border-top:1px solid #ddd; margin:12px 0; }
+  em { color:#777; font-size:7.5pt; font-style:normal; }
+  code { font-family:monospace; background:#f0f4f1; padding:0 3px; border-radius:3px; }
+  .err { color:#c0392b !important; font-weight:bold; }
+</style></head><body>
 <div class="head">
   <div class="brand">uCloudlink · 海外电商部</div>
-  <h1>海外电商库存去化方案</h1>
-  <div class="sub">基于 SKU 级库存明细的行动计划 ｜ 2026 年 9 月 – 12 月</div>
-  <div class="ask">目标：年底前净减 <b>20%</b>（约 8,000 台）</div>
+  <h1>海外电商库存去化方案（源表核准版）</h1>
+  <div class="sub">基于《库存明细表 2026.7.31》全量核算 ｜ 2026 年 9 月 – 12 月</div>
+  <div class="ask">现存 <b>39,889 台</b>　｜　目标净减 <b>7,978 台（20%）</b>　｜　真呆滞 <b>5,570 台</b></div>
 </div>
-
-<h2>〇、数据口径说明</h2>
-<p>本版以 <b>SKU 级库存明细表</b>为准，与上一版（基于 202607 月报汇总图表）的口径差异：</p>
-<ul>
-  <li><b>T20（PetPhone 产品线）不计入</b>本次海外电商去化范围（约 1,950 台），该产品线归属 PetPhone 电商部，建议单独制定去化计划；</li>
-  <li><b>半成品已剔除</b>，仅统计成品；</li>
-  <li><b>库龄由四档细化为五档</b>：≤3 个月 / 3–6 个月 / 6–12 个月 / <b>1–2 年 / 2 年以上</b>——新增的"1–2 年 / 2 年以上"拆分，是本版能精准识别"真呆滞"与"可周转"的关键。</li>
-</ul>
-<div class="callout note">
-明细表中的型号与数量为逐行读取汇总，主要口径已与 202607 月报交叉验证一致（如 G4 Pro 超 2 年 309 台、U50 6–12 个月约 3,300 台、C4 全部 ≤3 个月 1,303 台）。正式对外前建议以源表数据核对一遍。
-</div>
-
-<h2>一、现状与目标</h2>
-<p><b>核心问题：</b>海外电商 7 月末库存约 <b>1,372 万美元</b>，同比 2025、2024 分别增长 <b>61%、107%</b>，库存增速是收入增速的 3 倍。剔除 T20 与半成品后，成品库存约 <b>4.0 万台</b>：</p>
-
+<p><b>基于《库存明细表 2026.7.31》全量核算</b> ｜ 2026 年 9 月 – 12 月 ｜ 海外电商部</p>
+<hr>
+<h2>〇、数据口径与前版更正</h2>
+<p>本版以 <b>Excel 源表全量逐行核算</b>（179 行 SKU×仓库记录，22 个型号），替代前版基于截图的估算。源表口径：</p>
+<ul><li>范围：<b>仅&quot;成品/裸机&quot; × &quot;线上-海外电商部&quot;</b>，T20（PetPhone）与半成品本就不在表内；</li><li>库龄五档：≤3 个月 / 3–6 个月 / 6–12 个月 / 1–2 年 / 2 年以上；五档合计 = 库存总数 39,889 台（<b>与 202607 月报完全一致</b>）；</li><li>表中<b>无金额字段</b>，全部分析以台数为单位；金额影响需补充各型号单位成本后另算。</li></ul>
+<p><b>⚠ 前版（截图估算）的重大误判，本版已更正：</b></p>
 <table>
-  <tr><th style="width:20%">库龄</th><th style="width:18%">数量（约）</th><th style="width:12%">占比</th><th>性质判断</th></tr>
-  <tr><td>≤3 个月</td><td>13,500</td><td>34%</td><td>正常上新备货</td></tr>
-  <tr><td>3–6 个月</td><td>8,900</td><td>22%</td><td>在途消化中</td></tr>
-  <tr><td>6–12 个月</td><td>10,000</td><td>25%</td><td><b>可通过正常促销周转</b></td></tr>
-  <tr class="dead"><td>1–2 年</td><td>5,400</td><td>13%</td><td><b>真呆滞</b></td></tr>
-  <tr class="dead"><td>2 年以上</td><td>2,200</td><td>6%</td><td><b>真呆滞，优先出清</b></td></tr>
+<tr><th>项目</th><th>前版结论</th><th>源表实际</th><th>影响</th></tr>
+<tr><td><b>X200</b></td><td>约 1,180 台卡在 1–2 年，建议拆出清仓</td><td><b>超 1 年 = 0 台</b></td><td><span class="err">X</span> 严重误判，差点把健康新品拉去清仓</td></tr>
+<tr><td><b>X110</b></td><td>220 台超 2 年</td><td><b>超 1 年 = 0 台</b></td><td><span class="err">X</span> 误判</td></tr>
+<tr><td><b>SIMBOX2</b></td><td>46 台超 2 年</td><td><b>超 1 年 = 0 台</b></td><td><span class="err">X</span> 误判</td></tr>
+<tr><td><b>G40 超 1 年</b></td><td>约 760 台</td><td><b>1,353 台（44.8%）</b></td><td>严重低估，G40 实为<b>第一大呆滞源</b></td></tr>
+<tr><td><b>U3X</b></td><td>490 台（前版误写为 U2X）</td><td><b>1,468 台</b>，超 1 年 213 台</td><td>数量低估 3 倍，型号名有误</td></tr>
+<tr><td><b>U38</b></td><td>150 台</td><td><b>无此型号，实为 U3B</b>（153 台）</td><td>型号名有误</td></tr>
+<tr><td><b>U20 / U70</b></td><td>无法确认</td><td><b>确认为 U20</b>，4,305 台</td><td>已确认</td></tr>
+<tr><td><b>T10</b></td><td>2,200 台，超 1 年 1,940</td><td><b>1,593 台，超 1 年 1,295（81.3%）</b></td><td>数量高估，但&quot;老化最严重&quot;方向正确</td></tr>
+<tr><td><b>R40 / U2S</b></td><td>41 / 42 台</td><td><b>179 / 84 台</b>（均 100% 超 1 年）</td><td>低估</td></tr>
+<tr><td><b>超 1 年呆滞总量</b></td><td>约 7,600 台</td><td><b>5,570 台（14.0%）</b></td><td>高估 36%，<b>导致达标路径结论错误（见第二节）</b></td></tr>
+<tr><td>U50 / U40 超 1 年 = 0</td><td>✓</td><td>✓ 确认成立</td><td>判断正确，&quot;不要破价&quot;结论保留</td></tr>
+<tr><td>C4 全部 ≤3 个月 1,303 台</td><td>✓</td><td>✓ 完全一致</td><td>判断正确</td></tr>
 </table>
-
-<div class="kpi-row">
-  <div class="kpi"><div class="num">17,600 台</div><div class="lbl">超 6 个月库存合计（44%），与月报口径一致</div></div>
-  <div class="kpi"><div class="num">7,600 台</div><div class="lbl">其中已超 1 年的<b>真呆滞</b>部分，含 2,200 台超 2 年</div></div>
-  <div class="kpi"><div class="num">8,000 台</div><div class="lbl">全年 20% 去化目标；清掉呆滞库存即基本达成</div></div>
-</div>
-
-<div class="callout">
-<b>关键结构判断：</b>超 6 个月的 17,600 台里，性质完全不同——约 <b>10,000 台</b>在 6–12 个月，集中在 U50、X100、U3 等<b>仍在售的主力款</b>，属批次性压货，靠正常促销即可周转；约 <b>7,600 台</b>已超 1 年，是真正的呆滞库存。<b>只要把这 7,600 台清掉，再带走一部分 6–12 个月库存，即可达成全年目标——不需要对健康主力款破价。</b>
-</div>
-
-<h2>二、分层去化策略</h2>
-
-<h3><span class="tier-tag">TIER 1A</span>大批量滞销主力 — 渠道清仓，可放开折扣</h3>
+<hr>
+<h2>一、现状</h2>
+<p><b>总库存 39,889 台</b>（上月 40,913 台，<b>环比 -1,024 台 / -2.5%</b>）</p>
 <table>
-  <tr><th style="width:14%">型号</th><th style="width:13%">库存（约）</th><th style="width:30%">库龄结构</th><th>判断</th></tr>
-  <tr><td><b>X100</b></td><td>5,400</td><td>6–12月 约 2,900 ／ 3–6月 约 2,100 ／ 超1年 约 160</td><td>销量同比 <b>-2,061 台</b>，已被新款替代；库龄尚未恶化但量大、趋势向下，<b>是本次去化体量最大的单品</b></td></tr>
-  <tr><td><b>U3</b></td><td>6,100</td><td>超1年 约 2,100 ／ 6–12月 约 2,000</td><td>销量同比 <b>-1,149</b>；已有 2,100 台进入 1 年以上，是"正在变呆"的典型</td></tr>
-  <tr><td><b>G40</b></td><td>2,600</td><td>超1年 约 760 ／ 6–12月 约 760</td><td>各库龄段均有分布，长期周转不畅</td></tr>
-  <tr><td><b>T10</b>（含宠物版）</td><td>2,200</td><td><b>超 1 年约 1,940，占 88%</b></td><td><b>全产品线中老化最严重</b>，近期无新到货，应整体退市清理</td></tr>
+<tr><th>库龄</th><th>数量</th><th>占比</th><th>性质</th></tr>
+<tr><td>≤3 个月</td><td>13,542</td><td>34.0%</td><td>正常上新备货</td></tr>
+<tr><td>3–6 个月</td><td>8,687</td><td>21.8%</td><td>在途消化中</td></tr>
+<tr><td>6–12 个月</td><td>12,090</td><td>30.3%</td><td><b>风险池：不动则明年转呆滞</b></td></tr>
+<tr><td>1–2 年</td><td>3,792</td><td>9.5%</td><td><b>真呆滞</b></td></tr>
+<tr><td>2 年以上</td><td>1,778</td><td>4.5%</td><td><b>真呆滞，残值持续流失</b></td></tr>
+<tr><td><b>超 6 个月合计</b></td><td><b>17,660</b></td><td><b>44.3%</b></td><td>与月报 44% 一致</td></tr>
+<tr><td><b>超 1 年合计</b></td><td><b>5,570</b></td><td><b>14.0%</b></td><td>真正需要出清的部分</td></tr>
+</table>
+<p><b>按仓库分布：</b></p>
+<table>
+<tr><th>仓库</th><th>库存</th><th>环比</th><th>超 1 年</th><th>超 1 年占比</th><th>判断</th></tr>
+<tr><td>美国亚马逊仓</td><td>13,169</td><td>-1,215</td><td><b>3,149</b></td><td>23.9%</td><td><b>呆滞主战场</b>（占全部呆滞 57%），但去化也最快</td></tr>
+<tr><td>Shopify 仓</td><td>9,126</td><td>-1,097</td><td><b>0</b></td><td>0%</td><td>完全健康，去化顺畅</td></tr>
+<tr><td>海外电商部（中心仓）</td><td>9,062</td><td><b>+1,500</b></td><td>874</td><td>9.6%</td><td><b>唯一在增长的仓，需警惕继续压货</b></td></tr>
+<tr><td>美国仓(TK)</td><td>2,821</td><td>+183</td><td>100</td><td>3.5%</td><td>基本健康</td></tr>
+<tr><td>欧洲亚马逊仓</td><td>2,538</td><td>-112</td><td>650</td><td>25.6%</td><td>呆滞率偏高</td></tr>
+<tr><td>英国亚马逊仓</td><td>1,125</td><td>-92</td><td>213</td><td>18.9%</td><td>—</td></tr>
+<tr><td>加拿大亚马逊仓</td><td>1,022</td><td>-89</td><td>0</td><td>0%</td><td>健康</td></tr>
+<tr><td>日本亚马逊仓</td><td>741</td><td>-102</td><td>299</td><td><b>40.4%</b></td><td><b>呆滞率最高的仓</b></td></tr>
+<tr><td>美国退货仓</td><td>254</td><td>0</td><td><b>254</b></td><td><b>100%</b></td><td>全部为 G4 Pro，且全部超 2 年</td></tr>
+<tr><td>官网仓</td><td>31</td><td>0</td><td>31</td><td>100%</td><td>零星尾货</td></tr>
+</table>
+<hr>
+<h2>二、达标路径测算（本版核心修正）</h2>
+<p>目标：年底前净减 <b>20% = 7,978 台</b>。</p>
+<p><b>前版结论&quot;清掉超 1 年呆滞即可达标&quot;不成立</b>——超 1 年实际只有 5,570 台，小于目标值。正确路径应为两段：</p>
+<table>
+<tr><th>来源</th><th>数量</th><th>说明</th></tr>
+<tr><td>① 自然去化</td><td><b>约 4,096 台</b></td><td>7 月环比已实现 -1,024 台/月，9–12 月 4 个月按此速度顺延</td></tr>
+<tr><td>② 专项去化</td><td><b>约 3,882 台</b></td><td>需通过清仓、批发、赠品、报废等专项动作额外完成</td></tr>
+<tr><td><b>合计</b></td><td><b>7,978 台</b></td><td>达成 20% 目标</td></tr>
+</table>
+<p><b>关键判断：专项缺口仅 3,882 台，而超 1 年呆滞有 5,570 台</b>——意味着<b>只要把呆滞库存清掉七成，即可达标</b>，无需触碰任何健康主力款的价格体系。</p>
+<p><b>呆滞高度集中，打透 5 个型号覆盖 83%：</b></p>
+<table>
+<tr><th>排序</th><th>型号</th><th>超 1 年</th><th>占本型号</th><th>累计覆盖</th></tr>
+<tr><td>1</td><td><b>G40</b></td><td>1,353</td><td>44.8%</td><td>24.3%</td></tr>
+<tr><td>2</td><td><b>T10</b></td><td>1,295</td><td>81.3%</td><td>47.5%</td></tr>
+<tr><td>3</td><td><b>U3</b></td><td>1,225</td><td>20.2%</td><td>69.5%</td></tr>
+<tr><td>4</td><td><b>U20</b></td><td>433</td><td>10.1%</td><td>77.3%</td></tr>
+<tr><td>5</td><td><b>G4S（G4 Pro）</b></td><td>309</td><td>91.4%</td><td><b>82.9%</b></td></tr>
+<tr><td>6–14</td><td>U3X / G3 / R40 / U3B / U2S / X103 / U30 / X100 / U5</td><td>955</td><td>—</td><td>100%</td></tr>
+</table>
+<hr>
+<h2>三、分层策略</h2>
+<h3>Tier 1 · 呆滞出清（5,570 台，全部超 1 年，可放开折扣）</h3>
+<table>
+<tr><th>型号</th><th>库存</th><th>超 1 年</th><th>呆滞集中位置</th><th>动作</th></tr>
+<tr><td><b>G40</b></td><td>3,023</td><td><b>1,353（44.8%）</b></td><td>美亚 618+343+95、日亚 126、欧亚 122</td><td>第一大呆滞源，全渠道清仓 + 尾货批发</td></tr>
+<tr><td><b>T10</b></td><td>1,593</td><td><b>1,295（81.3%）</b></td><td>中心仓 320+225+80、美亚 178+89、欧亚 108+98</td><td><b>老化率最高，建议整体 EOL 退市</b></td></tr>
+<tr><td><b>U3</b></td><td>6,051</td><td><b>1,225（20.2%）</b></td><td>美亚 993（单行最大）、TK 仓 100、美亚 86</td><td>呆滞部分单独出清，在售部分保留正常销售</td></tr>
+<tr><td><b>U20</b></td><td>4,305</td><td>433（10.1%）</td><td>欧亚 120、美亚 84+52、日亚 61、英亚 49</td><td>仅清呆滞批次，新货（2,979 台 ≤3 月）不动</td></tr>
+<tr><td><b>G4S / G4 Pro</b></td><td>338</td><td><b>309（91.4%）</b></td><td><b>美国退货仓 250 台（100% 超 2 年）</b></td><td>EOL，走翻新/报废，见下方客退品专项</td></tr>
+<tr><td>U3X</td><td>1,468</td><td>213（14.5%）</td><td>美亚 96、官网仓 29</td><td>仅清呆滞批次</td></tr>
+<tr><td>G3</td><td>244</td><td>202（82.8%）</td><td>美亚 104+98</td><td>整批处置</td></tr>
+<tr><td>R40</td><td>179</td><td><b>179（100%）</b></td><td>中心仓 147</td><td>整批处置</td></tr>
+<tr><td>U3B</td><td>153</td><td>126（82.4%）</td><td>美亚 109</td><td>整批处置</td></tr>
+<tr><td>U2S</td><td>84</td><td><b>84（100%）</b></td><td>—</td><td>整批处置</td></tr>
+<tr><td>X103 / U30 / U5</td><td>413</td><td>144</td><td>—</td><td>并入尾货批次</td></tr>
 </table>
 <p><b>执行动作：</b></p>
-<ul>
-  <li><b>亚马逊：</b>Outlet / Warehouse Deals + 深度 Lightning Deal（视毛利空间 30–50% off），开清仓专场；</li>
-  <li><b>官网：</b>Clearance 专区，搭配 Tier 4 小件赠品联动；</li>
-  <li><b>B2B / 尾货批发：</b>X100、T10 建议整批打包给跨境尾货商，优先换现金流、腾库位；</li>
-  <li><b>KOL 置换：</b>作为 Reddit UGC / 国内达人营销的测评样机与抽奖赠品，不占新增预算；</li>
-  <li><b>客退品专项复检：</b>历年累积客退品单独分拣，可翻新的走 Renewed 渠道单独 listing。</li>
-</ul>
-
-<h3><span class="tier-tag t1b">TIER 1B</span>小批量完全呆滞尾货 — 不值得做活动，直接处置</h3>
-<p>以下型号数量不大，但<b>绝大部分已超 1 年甚至超 2 年</b>，继续留在账上只会持续拉低周转率：</p>
+<ul><li><b>亚马逊（呆滞占 57%，主战场）</b>：Outlet / Warehouse Deals + 深度 Lightning Deal（30–50% off），美亚优先，欧亚、日亚跟进；</li><li><b>日本亚马逊仓需专项处理</b>：呆滞率 40.4% 为全仓最高，但总量仅 741 台，建议整仓盘点后打包处理；</li><li><b>B2B / 尾货批发</b>：G40、T10 整批打包给跨境尾货商，优先回现、腾库位；</li><li><b>KOL 置换</b>：G3、R40、U2S、U3B 等小批量老款作为达人测评样机与抽奖赠品，不占新增预算；</li><li><b>超 2 年部分（1,778 台）</b>：残值持续流失，能卖则搭车清仓，卖不动直接走赠品/报废/捐赠，资产减值一次性出表。</li></ul>
+<h3>Tier 2 · 风险池拦截（12,090 台在 6–12 个月，专项缺口从这里补）</h3>
+<p>这批<b>尚未呆滞但不动就会变呆滞</b>，且专项缺口 3,882 台需有一部分从此处消化：</p>
 <table>
-  <tr><th style="width:20%">型号</th><th style="width:20%">库存（约）</th><th>呆滞情况</th></tr>
-  <tr><td><b>G3</b></td><td>240</td><td><b>100% 超 1 年</b>，其中 200+ 台超 2 年</td></tr>
-  <tr><td><b>X110</b></td><td>390</td><td>220 台超 2 年（56%）</td></tr>
-  <tr><td><b>G4 Pro</b></td><td>340</td><td><b>309 台超 2 年（91%）</b>，销量已归零，EOL</td></tr>
-  <tr><td><b>U3X</b></td><td>490</td><td>约 270 台超 1 年（55%）</td></tr>
-  <tr><td><b>U38</b></td><td>150</td><td>约 142 台超 1 年（95%）</td></tr>
-  <tr><td><b>SIMBOX2</b></td><td>280</td><td>46 台超 2 年，其余 6–12 个月</td></tr>
-  <tr><td><b>X103</b></td><td>320</td><td>约 120 台超 1 年</td></tr>
-  <tr><td><b>U2S / R40 / U5 等</b></td><td>各数十台</td><td>基本 100% 超 1 年</td></tr>
+<tr><th>型号</th><th>6–12 个月</th><th>占本型号</th><th>判断与动作</th></tr>
+<tr><td><b>U50</b></td><td>3,268</td><td>42.6%</td><td>库存最大（7,664 台）但<b>超 1 年 = 0</b>，销量健康。属备货周期拉长导致的批次性压货。<b>不破价</b>，用捆绑/满减加速周转；核心是让采购压缩下一批备货量</td></tr>
+<tr><td><b>U3</b></td><td>2,877</td><td>47.5%</td><td>销量同比 -1,149，近半库存已进 6–12 个月，<b>是下一批呆滞的最大来源</b>，需中等力度促销主动拉动</td></tr>
+<tr><td><b>X100</b></td><td>2,448</td><td>46.9%</td><td><b>超 1 年仅 7 台，但销量同比 -2,061</b>——说明是&quot;近期大批到货却卖不动&quot;，属备货误判而非历史遗留。5,215 台中 4,605 台已过 3 个月，<b>建议本轮就纳入清仓，不要等它变呆滞</b></td></tr>
+<tr><td>G40</td><td>819</td><td>27.1%</td><td>与 Tier 1 呆滞部分一并处理</td></tr>
+<tr><td>U3X</td><td>603</td><td>41.1%</td><td>同上</td></tr>
+<tr><td>U40</td><td>529</td><td>14.2%</td><td>健康款，正常周转即可</td></tr>
+<tr><td>其他</td><td>1,546</td><td>—</td><td>监控</td></tr>
 </table>
-<p><b>处理建议：</b>这批合计约 <b>2,200 台</b>，单独开清仓活动的运营成本高于库存本身价值：</p>
-<ol>
-  <li><b>能卖的：</b>并入 Tier 1A 清仓专区"搭车"销售，或整批给尾货商，不单独投入运营资源；</li>
-  <li><b>超 2 年、外观或包装已老化的：</b>直接走<b>赠品池 / 报废 / 捐赠</b>，做资产减值一次性出表——放得越久残值越低，且原本非质量问题的机器也会因久放出现质量问题。</li>
-</ol>
-
-<h3><span class="tier-tag t2">TIER 2</span>阶段性压货的在售主力 — 加速周转，不建议破价</h3>
+<h3>Tier 3 · 健康库存（不动价）</h3>
 <table>
-  <tr><th style="width:13%">型号</th><th style="width:12%">库存（约）</th><th style="width:28%">库龄特征</th><th>建议动作</th></tr>
-  <tr><td><b>U50</b></td><td>7,800</td><td><b>超 1 年 = 0</b>；6–12 个月约 3,300，≤3 个月约 3,800</td><td>库存最大但<b>完全没有呆滞</b>，是海外仓备货周期拉长导致的批次性压货。不打折伤价格体系，靠捆绑/满减加速周转；重点是让采购按新物流周期（约 3 个月）压缩下一批备货量</td></tr>
-  <tr><td><b>U40</b></td><td>3,700</td><td><b>超 1 年 = 0</b>，全部在 12 个月内</td><td>销量同比大幅增长，健康款，仅需控制后续到货节奏</td></tr>
-  <tr><td><b>U20 / U70</b></td><td>4,700</td><td>以 ≤3 个月为主</td><td>销量增长中，正常补货，监控即可</td></tr>
-  <tr><td><b>U2X</b></td><td>700</td><td>无超 1 年</td><td>正常周转</td></tr>
+<tr><th>型号</th><th>库存</th><th>超 1 年</th><th>说明</th></tr>
+<tr><td><b>C4</b></td><td>1,303</td><td>0</td><td>100% ≤3 个月，新品首批备货</td></tr>
+<tr><td><b>G50 Max</b></td><td>308</td><td>0</td><td>100% ≤3 个月，新品</td></tr>
+<tr><td><b>U40</b></td><td>3,720</td><td><b>0</b></td><td>销量大幅增长，健康</td></tr>
+<tr><td><b>X200</b></td><td>2,961</td><td><b>0</b></td><td>⚠ 前版误判有老货，实际零呆滞，新品爬坡正常</td></tr>
+<tr><td><b>X110</b></td><td>624</td><td><b>0</b></td><td>⚠ 前版误判有老货，实际零呆滞</td></tr>
+<tr><td><b>U50</b></td><td>7,664</td><td><b>0</b></td><td>见 Tier 2，仅需加速周转</td></tr>
 </table>
-
-<h3><span class="tier-tag t3">TIER 3</span>健康新品 — 不动价</h3>
+<p><b>唯一动作</b>：提醒采购按新物流周期（约 3 个月）压缩后续批次备货量，尤其中心仓环比 +1,500 台，需立即刹车。</p>
+<h3>Tier 4 · 客退品与长尾小件</h3>
+<ul><li><b>客退品专项</b>：美国退货仓仅 <b>254 台</b>（G4 Pro 黑色 250 + 白色 4），<b>全部超 2 年</b>。这与邮件中&quot;客退品堆积应有几千台&quot;的判断差距较大，<b>建议先核实其余客退品是否已混入各仓正常库存账</b>——若已混入，则各仓超 2 年的 1,778 台中可能含相当比例客退品，需在盘点时区分&quot;可翻新&quot;与&quot;真实质量问题&quot;，分别走 Renewed 渠道与报废；</li><li><b>长尾小件</b>（SIM 卡、配件、包装物料等，不在本表统计范围）：划入赠品池用于 KOL 寄样、复购满赠、展会礼品、客服备件；用不掉的走报废/捐赠。</li></ul>
+<hr>
+<h2>四、执行排期（2026 年 9–12 月）</h2>
 <table>
-  <tr><th style="width:25%">型号</th><th style="width:25%">库存</th><th>库龄</th></tr>
-  <tr><td><b>C4</b></td><td>1,303</td><td>100% ≤3 个月</td></tr>
-  <tr><td><b>G50 Max</b></td><td>410</td><td>100% ≤3 个月</td></tr>
-  <tr><td><b>G40 Max</b></td><td>65</td><td>100% ≤3 个月</td></tr>
+<tr><th>月份</th><th>重点动作</th><th>目标去化</th></tr>
+<tr><td>9 月</td><td>Tier 1 呆滞清仓上线（美亚优先）；G40/T10 尾货批发询价；美国退货仓 254 台 + 客退品盘点启动；中心仓备货刹车</td><td>约 1,200 台</td></tr>
+<tr><td>10 月</td><td>Tier 1 加码；日亚整仓专项处理；X100 提前纳入清仓；U3 中等力度促销启动</td><td>约 1,800 台</td></tr>
+<tr><td>11 月</td><td><b>黑五网一</b>——全年最佳清库窗口，Tier 1 + X100 力度叠加大促</td><td>约 3,500 台</td></tr>
+<tr><td>12 月</td><td>收尾；走不动的残值报废/捐赠出表；全年去化率汇报</td><td>约 1,500 台</td></tr>
+<tr><td>—</td><td><b>合计（含自然去化）</b></td><td><b>约 8,000 台 ✓</b></td></tr>
 </table>
-<p>这批是刚上市的首批备货，若被一刀切降价清仓，反而会伤害新品定价。<b>唯一动作：</b>提醒采购根据近期到货量放缓后续批次节奏。</p>
-<div class="callout warn">
-<b>需要留意：X200 / X200T 不能全当新品看。</b>明细显示 X200 系列约 2,800 台中，<b>有约 1,180 台已进入 1–2 年库龄</b>（集中在某一个白色欧洲电商版 SKU，1,080 台），其余约 1,000 台才是近 3 个月的新货。建议把这 1,080 台老批次单独拆出来并入 Tier 1B 处理，不要与新批次混在一起做定价。
-</div>
-
-<h3><span class="tier-tag t4">TIER 4</span>长尾小件 — 赠品池处理</h3>
-<p>SIM 卡、配件、包装、立牌等长尾物料，单条记录仅几十件，SKU 分散、单价低。分两类：</p>
-<ol>
-  <li><b>转为低成本市场费用：</b>划入赠品池，用于 KOL / 达人测评寄样、老客户复购满赠、展会抽奖礼品、客服质保换新备用件——这些开销早晚要花，用库存抵扣现金采购更划算；</li>
-  <li><b>连赠品都用不掉的：</b>（过季包装、纯物料）走报废或捐赠，资产减值一次性出表。</li>
-</ol>
-
-<h2>三、执行排期（2026 年 9–12 月）</h2>
-<table>
-  <tr><th style="width:12%">月份</th><th>重点动作</th></tr>
-  <tr><td>9 月</td><td>Tier 1A（X100 / U3 / G40 / T10）清仓上线；Tier 1B 尾货整批询价 + 超 2 年部分启动报废/赠品流程；X200 老批次拆分</td></tr>
-  <tr><td>10 月</td><td>Tier 1A 效果复盘并加码；U50 补货节奏调整落地；Tier 4 赠品池分配到 KOL / 客服 / 活动三条线</td></tr>
-  <tr><td>11 月</td><td><b>黑五网一</b>——全年最佳清库窗口，Tier 1A + Tier 1B 力度叠加大促，集中走量</td></tr>
-  <tr><td>12 月</td><td>收尾盘点；走不动的残值做减值处理；向管理层汇报全年去化率</td></tr>
-</table>
-<div class="callout">
-<b>成本说明：</b>本方案基本不需要新增市场预算——清仓折扣从现有毛利中出，KOL 置换以库存抵成本、尾货批发直接回现——符合"控制新增费用、关注库存与资金占用效果"的经营要求。<br>
-<b>月度追踪抓手：</b>只需盯两个数——<b>超 1 年库存台数</b>（起点约 7,600 台）与 <b>Tier 1A 四个型号库存台数</b>（起点约 16,300 台），即可判断去化是否见效。
-</div>
-
-<h2>四、请示与待确认事项</h2>
-<ol>
-  <li><b>确认 Tier 1A 四个型号的清仓折扣权限</b>（30–50% off）及执行渠道（Amazon Outlet / 尾货批发 / KOL 置换）；</li>
-  <li><b>确认 Tier 1B 超 2 年库存的报废/捐赠额度</b>，涉及资产减值，需财务口径同步；</li>
-  <li><b>T10 产品线是否整体退市</b>——超 1 年占比 88%，建议明确 EOL 决策，避免继续占用仓位；</li>
-  <li><b>X200 老批次（约 1,080 台）单独拆分处理</b>，避免与新批次混用定价；</li>
-  <li><b>启动客退品专项复检</b>，区分可翻新与真实质量问题，分别定价与渠道处理；</li>
-  <li><b>供应链侧确认：</b>U50 / U40 / X200 / C4 等健康款下一批次备货节奏按新物流周期（约 3 个月）适度放缓；</li>
-  <li><b>T20（PetPhone）单独立项：</b>约 1,950 台不在本方案范围内，建议由 PetPhone 电商部同步制定去化计划。</li>
-</ol>
-
-<p class="footer-note">数据来源：SKU 级库存明细表（T20 与半成品已剔除），并与海外电商部 202607 月度库存数据（陈艺飞 / 刘伊 / 林霖邮件往来）交叉验证。型号级台数为明细表逐行汇总的近似值，正式对外前建议以源表复核；折扣力度与现金回收测算需补充各型号单价与毛利数据后进一步精确。</p>
-
-</body>
-</html>
+<p><b>成本说明</b>：不需要新增市场预算——折扣从现有毛利出，KOL 置换以库存抵成本，尾货批发直接回现。</p>
+<p><b>月度追踪三个数</b>：① 总库存台数（起点 39,889）；② 超 1 年台数（起点 5,570）；③ 中心仓库存（起点 9,062，环比须由 +1,500 转负）。</p>
+<hr>
+<h2>五、请示与待确认事项</h2>
+<ol><li><b>确认 Tier 1 清仓折扣权限</b>（30–50% off）及渠道（Amazon Outlet / 尾货批发 / KOL 置换）；</li><li><b>T10 是否整体 EOL 退市</b>——超 1 年占 81.3%，且中心仓、美亚、欧亚、日亚、英亚五仓均有分布，建议一次性清空；</li><li><b>X100 是否提前纳入本轮清仓</b>——目前超 1 年仅 7 台不算呆滞，但销量同比 -2,061、近九成库存已过 3 个月，等它变呆滞成本更高（本方案建议提前处理）；</li><li><b>确认超 2 年库存（1,778 台）的报废/捐赠额度</b>，涉及资产减值，需财务口径同步；</li><li><b>客退品口径核实</b>——退货仓账面仅 254 台，与&quot;几千台&quot;判断差距大，请确认其余是否已混入各仓正常库存；</li><li><b>中心仓备货刹车</b>——海外电商部仓环比 +1,500 台是唯一增长仓，请供应链确认后续批次按约 3 个月物流周期压缩；</li><li><b>补充单位成本数据</b>——本表无金额字段，如需按&quot;金额降 20%&quot;而非&quot;台数降 20%&quot;考核，需补各型号成本价重算。</li></ol>
+<hr>
+<p><em>数据来源：《库存明细表 2026.7.31》（179 行，22 个型号，仅成品/裸机 × 线上-海外电商部），全量逐行核算；总数 39,889 台与海外电商部 202607 月报一致。附型号级明细 CSV：<code>库存去化_型号级明细_202607.csv</code>。</em></p>
+</body></html>
